@@ -17,29 +17,33 @@ namespace NewtonRaphsonCalc
             Expressao = expressao;
         }
 
-        public Expr DerivarNoPonto(double ponto)
-        {
-            var x = SymbolicExpression.Variable("x");
-            ////SymbolicExpression func = 3 * (x * x * x) + 2 * x - 6;
-            ////Console.WriteLine("f(x) = " + func.ToString());
-
-            return Expressao.DifferentiateAt(x, ponto);
-            
-        }
-
-        public FloatingPoint AplicarNoPonto(double ponto)
+        public double DerivarNoPonto(double ponto)
         {
             var variables = new Dictionary<string, FloatingPoint>
                 {
                     { "x", ponto }
                 };
-            return Expressao.Evaluate(variables);
+          
+            var x = SymbolicExpression.Variable("x");
+            var result = Expressao.Differentiate(x);
+            return result.Evaluate(variables).RealValue;
+            //var r =  Expressao.DifferentiateAt(x, ponto).RealValue;
+            //return r.RealNumberValue;
+
         }
 
-        public FloatingPoint MetodoNewton(double ponto)
+        public double AplicarNoPonto(double ponto)
         {
-            var result = ponto - Convert.ToDouble((DerivarNoPonto(ponto)).ToString()) / Convert.ToDouble(AplicarNoPonto(ponto).ToString());
-            return result;
+            var variables = new Dictionary<string, FloatingPoint>
+                {
+                    { "x", ponto }
+                };
+            return Expressao.Evaluate(variables).RealValue ;
+        }
+
+        public double MetodoNewton(double ponto)
+        {         
+            return ponto - AplicarNoPonto(ponto) / DerivarNoPonto(ponto) ;
         }
 
     }

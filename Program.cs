@@ -5,28 +5,28 @@ namespace NewtonRaphsonCalc
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("1 - Escolher minha propria \n 2- função c1 pré-gerada");
             Console.WriteLine("Digite a func: ");
             Funcao funcao = new Funcao(Console.ReadLine());
 
+            Console.WriteLine("Digite o erro: ");
+            double erro = Convert.ToDouble(Console.ReadLine());
             var random = new Random();
-            double x1 = random.Next();
-            Console.WriteLine(x1);
+            double x0 = random.Next();         
 
-            var derivadaNoPonto = funcao.DerivarNoPonto(x1);
-            Console.WriteLine(derivadaNoPonto);
+            while(true)
+            {
+                var x1 = funcao.MetodoNewton(x0);
+                var x2 = funcao.MetodoNewton(x1);
 
-            //var r = derivadaNoPonto.ToString();
-            //var _r = Convert.ToDouble(r);
-            var a = funcao.AplicarNoPonto(Convert.ToDouble(derivadaNoPonto.ToString()));
-             
+                if (erro > Math.Abs(x1 - x2)) { 
+                    Console.WriteLine(x2);
+                    break;
+                };
 
-            var b = funcao.MetodoNewton(x1);
+                x0 = x2;
+            }
+                 
 
-
-
-            //Console.WriteLine("Escolha o epsilon ");
-            //int epsilon = Convert.ToInt16(Console.ReadLine());
         } 
 
      
