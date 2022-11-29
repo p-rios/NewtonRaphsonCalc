@@ -38,7 +38,8 @@ namespace NewtonRaphsonCalc
 
         public FloatingPoint MetodoNewton(double ponto)
         {
-            result = ponto - 
+            var result = ponto - Convert.ToDouble((DerivarNoPonto(ponto)).ToString()) / Convert.ToDouble(AplicarNoPonto(ponto).ToString());
+            return result;
         }
 
     }

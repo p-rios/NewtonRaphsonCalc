@@ -19,7 +19,9 @@ namespace NewtonRaphsonCalc
             //var r = derivadaNoPonto.ToString();
             //var _r = Convert.ToDouble(r);
             var a = funcao.AplicarNoPonto(Convert.ToDouble(derivadaNoPonto.ToString()));
-           
+             
+
+            var b = funcao.MetodoNewton(x1);
 
 
 
