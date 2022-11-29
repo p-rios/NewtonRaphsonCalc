@@ -9,8 +9,7 @@ namespace NewtonRaphsonCalc
 {
     public class Funcao
     {
-        public Expr Expressao { get; set; }
-       
+        public Expr Expressao { get; set; }       
 
         public Funcao(Expr expressao)
         {
@@ -24,12 +23,8 @@ namespace NewtonRaphsonCalc
                     { "x", ponto }
                 };
           
-            var x = SymbolicExpression.Variable("x");
-            var result = Expressao.Differentiate(x);
-            return result.Evaluate(variables).RealValue;
-            //var r =  Expressao.DifferentiateAt(x, ponto).RealValue;
-            //return r.RealNumberValue;
-
+            var x = Expr.Variable("x");
+            return Expressao.Differentiate(x).Evaluate(variables).RealValue;                             
         }
 
         public double AplicarNoPonto(double ponto)
@@ -38,7 +33,7 @@ namespace NewtonRaphsonCalc
                 {
                     { "x", ponto }
                 };
-            return Expressao.Evaluate(variables).RealValue ;
+            return Expressao.Evaluate(variables).RealValue;
         }
 
         public double MetodoNewton(double ponto)
