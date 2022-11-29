@@ -8,10 +8,19 @@ namespace NewtonRaphsonCalc
             //Console.WriteLine("1 - Escolher minha propria \n 2- função c1 pré-gerada");
             Console.WriteLine("Digite a func: ");
             Funcao funcao = new Funcao(Console.ReadLine());
-      
-            funcao.Derivada = funcao.Derivar();
-            Console.WriteLine(funcao.Derivada);
-                 
+
+            var random = new Random();
+            double x1 = random.Next();
+            Console.WriteLine(x1);
+
+            var derivadaNoPonto = funcao.DerivarNoPonto(x1);
+            Console.WriteLine(derivadaNoPonto);
+
+            //var r = derivadaNoPonto.ToString();
+            //var _r = Convert.ToDouble(r);
+            var a = funcao.AplicarNoPonto(Convert.ToDouble(derivadaNoPonto.ToString()));
+           
+
 
 
             //Console.WriteLine("Escolha o epsilon ");
