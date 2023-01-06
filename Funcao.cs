@@ -20,20 +20,20 @@ namespace NewtonRaphsonCalc
         {
             Coeficientes= coeficientes;
         }
-
+        //aplicacao do metodo de briof para achar um polinomio de grau n-1 
         public List<double> Briot(double ponto)
         {
-           
+
             var listaBriot = new List<double>();
             int i = 0;
             int UltimoGrau = Coeficientes.Count;
             foreach (double coeficiente in Coeficientes)
             {
-                if (i == 0) 
+                if (i == 0)
                 { listaBriot.Add(coeficiente);
                     i++;
                 }
-                if(i == 1)
+                if (i == 1)
                 {
 
                     int j = i - 1;
@@ -44,7 +44,7 @@ namespace NewtonRaphsonCalc
 
                 }
 
-                if(i>1 && i<UltimoGrau)
+                if (i > 1 && i < UltimoGrau)
                 {
                     int j = i - 1;
                     double quociente = listaBriot[j] * ponto + Coeficientes[i];
@@ -52,29 +52,29 @@ namespace NewtonRaphsonCalc
                     i++;
                 }
             }
-            return listaBriot; 
+            return listaBriot;
         }
-
-         public double DerivarNoPonto(double ponto)
+        //aplicando o polinomio de grau n-1 no ponto
+        public double DerivarNoPonto(double ponto)
         {
             var listaQuocientes = new List<double>();
             int k = 2;
             int UltimoGrau = Coeficientes.Count;
-           
+
             foreach (double q in Briot(ponto))
             {
-                double _quociente = Math.Pow(ponto,UltimoGrau -k) * q;
+                double _quociente = Math.Pow(ponto, UltimoGrau - k) * q;
                 listaQuocientes.Add(_quociente);
                 k++;
-              
+
             }
 
             listaQuocientes.RemoveAt(listaQuocientes.Count - 1);
             double somaLista = listaQuocientes.Sum();
-           
+
             return somaLista;
         }
-
+        //aplicando a funcao no ponto
         public double AplicarNoPonto(double ponto)
         {
             int k = 1;
@@ -88,7 +88,7 @@ namespace NewtonRaphsonCalc
             }
             return listaPontos.Sum();
         }
-
+        //implementacao metodo de newton
         public double MetodoNewton(double ponto)
         {         
             return ponto - AplicarNoPonto(ponto) / DerivarNoPonto(ponto) ;
